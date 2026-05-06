@@ -15,6 +15,8 @@ python3 -m http.server 8080
 # then open http://localhost:8080
 ```
 
+A `SessionStart` hook in `.claude/settings.local.json` automatically starts the server and opens `http://localhost:8080` in the browser each time a Claude Code session begins in this project.
+
 ## Architecture
 
 `index.html` is structured in document order:
