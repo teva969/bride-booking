@@ -19,7 +19,7 @@
 
 ## Screenshot
 
-![Screenshot](screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/teva969/bride-booking/main/screenshot.png)
 
 > Live at **https://teva969.github.io/bride-booking/**
 
