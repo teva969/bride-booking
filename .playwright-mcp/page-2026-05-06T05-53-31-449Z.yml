@@ -1,0 +1,135 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: ✨ Eternal Moments
+      - list [ref=e5]:
+        - listitem [ref=e6]:
+          - link "About" [ref=e7] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=e8]:
+          - link "Packages" [ref=e9] [cursor=pointer]:
+            - /url: "#packages"
+        - listitem [ref=e10]:
+          - link "Gallery" [ref=e11] [cursor=pointer]:
+            - /url: "#gallery"
+        - listitem [ref=e12]:
+          - link "Book Now" [ref=e13] [cursor=pointer]:
+            - /url: "#booking"
+        - listitem [ref=e14]:
+          - link "Contact" [ref=e15] [cursor=pointer]:
+            - /url: "#contact"
+  - generic [ref=e17]:
+    - heading "Capture Your Love Story" [level=1] [ref=e18]
+    - paragraph [ref=e19]: Timeless bridal photography that celebrates your unique journey
+    - link "Schedule Your Session" [ref=e20] [cursor=pointer]:
+      - /url: "#booking"
+  - generic [ref=e22]:
+    - heading "About Us" [level=2] [ref=e23]
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - heading "Your Story, Beautifully Told" [level=3] [ref=e26]
+        - paragraph [ref=e27]: With over a decade of experience capturing precious moments, we specialize in creating stunning bridal photography that reflects your personality and style.
+        - paragraph [ref=e28]: Our approach combines timeless elegance with contemporary artistry, ensuring your wedding photos will be cherished for generations to come.
+        - paragraph [ref=e29]: We believe every bride deserves photography as unique and beautiful as she is. Let us help you preserve the magic of your special day.
+      - img "Bridal Photography" [ref=e31]
+  - generic [ref=e33]:
+    - heading "Our Packages" [level=2] [ref=e34]
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "Intimate" [level=3] [ref=e37]
+        - generic [ref=e38]: $1,500
+        - list [ref=e39]:
+          - listitem [ref=e40]: ✓ 2 Hours Coverage
+          - listitem [ref=e41]: ✓ 50+ High-Res Photos
+          - listitem [ref=e42]: ✓ Professional Editing
+          - listitem [ref=e43]: ✓ Digital Gallery
+      - generic [ref=e44]:
+        - heading "Classic" [level=3] [ref=e45]
+        - generic [ref=e46]: $3,000
+        - list [ref=e47]:
+          - listitem [ref=e48]: ✓ 6 Hours Coverage
+          - listitem [ref=e49]: ✓ 150+ High-Res Photos
+          - listitem [ref=e50]: ✓ Professional Editing
+          - listitem [ref=e51]: ✓ Digital Gallery + Album
+          - listitem [ref=e52]: ✓ Engagement Session
+      - generic [ref=e53]:
+        - heading "Premium" [level=3] [ref=e54]
+        - generic [ref=e55]: $5,000
+        - list [ref=e56]:
+          - listitem [ref=e57]: ✓ Full Day Coverage (10 hrs)
+          - listitem [ref=e58]: ✓ 300+ High-Res Photos
+          - listitem [ref=e59]: ✓ Professional Editing
+          - listitem [ref=e60]: ✓ Digital Gallery + Album
+          - listitem [ref=e61]: ✓ 2 Engagement Sessions
+          - listitem [ref=e62]: ✓ Video Highlight Reel
+  - generic [ref=e64]:
+    - heading "Gallery" [level=2] [ref=e65]
+    - generic [ref=e66]:
+      - img "Bridal Portrait" [ref=e68]
+      - img "Wedding Dress Detail" [ref=e70]
+      - img "Bride and Groom" [ref=e72]
+      - img "Wedding Moment" [ref=e74]
+      - img "Bride Smiling" [ref=e76]
+      - img "Wedding Rings" [ref=e78]
+  - generic [ref=e80]:
+    - heading "Book Your Session" [level=2] [ref=e81]
+    - generic [ref=e83]:
+      - generic [ref=e84]:
+        - generic [ref=e85]:
+          - generic [ref=e86]: Full Name *
+          - textbox "Full Name *" [ref=e87]
+        - generic [ref=e88]:
+          - generic [ref=e89]: Email *
+          - textbox "Email *" [ref=e90]
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - generic [ref=e93]: Phone *
+          - textbox "Phone *" [ref=e94]
+        - generic [ref=e95]:
+          - generic [ref=e96]: Number of People *
+          - spinbutton "Number of People *" [ref=e97]
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]: Preferred Date *
+          - textbox "Preferred Date *" [ref=e101]
+        - generic [ref=e102]:
+          - generic [ref=e103]: Preferred Time *
+          - textbox "Preferred Time *" [ref=e104]
+      - generic [ref=e105]:
+        - generic [ref=e106]:
+          - generic [ref=e107]: Package *
+          - combobox "Package *" [ref=e108]:
+            - option "Select a package" [selected]
+            - option "Intimate - $1,500"
+            - option "Classic - $3,000"
+            - option "Premium - $5,000"
+        - generic [ref=e109]:
+          - generic [ref=e110]: Location *
+          - textbox "Location *" [ref=e111]:
+            - /placeholder: e.g., Downtown, Venue Name
+      - generic [ref=e112]:
+        - generic [ref=e113]: Message / Special Requests
+        - textbox "Message / Special Requests" [ref=e114]:
+          - /placeholder: Tell us more about your vision...
+      - button "Book Now" [ref=e115] [cursor=pointer]
+      - generic [ref=e133]: ✓ Thank you! Your booking request has been sent successfully. We'll contact you soon to confirm your session.
+  - generic [ref=e117]:
+    - heading "Get In Touch" [level=2] [ref=e118]
+    - generic [ref=e119]:
+      - generic [ref=e120]:
+        - heading "📍 Address" [level=4] [ref=e121]
+        - paragraph [ref=e122]:
+          - text: 123 Photography Lane
+          - text: New York, NY 10001
+      - generic [ref=e123]:
+        - heading "📞 Phone" [level=4] [ref=e124]
+        - paragraph [ref=e125]:
+          - link "(212) 555-1234" [ref=e126] [cursor=pointer]:
+            - /url: tel:+12125551234
+      - generic [ref=e127]:
+        - heading "✉️ Email" [level=4] [ref=e128]
+        - paragraph [ref=e129]:
+          - link "hello@eternalmoments.com" [ref=e130] [cursor=pointer]:
+            - /url: mailto:hello@eternalmoments.com
+  - contentinfo [ref=e131]:
+    - paragraph [ref=e132]: © 2024 Eternal Moments Photography. All rights reserved. ✨

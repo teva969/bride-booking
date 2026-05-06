@@ -1,0 +1,200 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: 花嫁
+        - generic [ref=e6]: Hanayome · Bridal
+      - button "Menu" [ref=e7] [cursor=pointer]
+  - generic [ref=e11]:
+    - generic [ref=e14]:
+      - paragraph [ref=e15]: 美しい瞬間を永遠に
+      - heading "Your Love Story, Forever in Bloom" [level=1] [ref=e16]:
+        - text: Your Love Story,
+        - emphasis [ref=e17]: Forever in Bloom
+      - paragraph [ref=e18]: Japanese bridal photography — refined, timeless, unforgettable
+      - link "Schedule Your Session" [ref=e19] [cursor=pointer]:
+        - /url: "#booking"
+    - generic [ref=e21]: Scroll
+  - generic [ref=e23]:
+    - text: 物語
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]: Our Story
+        - heading "Wabi-Sabi Beauty 侘び寂びの美しさ" [level=2] [ref=e27]:
+          - text: Wabi-Sabi Beauty
+          - generic [ref=e28]: 侘び寂びの美しさ
+      - generic [ref=e31]:
+        - img "Cherry blossom bridal portrait" [ref=e33]
+        - generic [ref=e34]:
+          - heading "Where cherry blossoms meet eternal love" [level=3] [ref=e35]:
+            - text: Where
+            - emphasis [ref=e36]: cherry blossoms
+            - text: meet eternal love
+          - paragraph [ref=e37]:
+            - text: Inspired by the Japanese philosophy of
+            - emphasis [ref=e38]: mono no aware
+            - text: — the bittersweet beauty of fleeting moments — we capture your wedding day with the sensitivity and artistry it deserves.
+          - paragraph [ref=e39]: "Each session is choreographed like a carefully composed haiku: nothing excessive, everything intentional. We find poetry in a glance, a petal's fall, the soft light of a golden hour."
+          - paragraph [ref=e40]: With over a decade of experience photographing ceremonies across Japan and beyond, we bring a refined aesthetic eye to every frame.
+          - generic [ref=e41]:
+            - generic [ref=e42]:
+              - generic [ref=e43]: 10+
+              - generic [ref=e44]: Years Experience
+            - generic [ref=e45]:
+              - generic [ref=e46]: 500+
+              - generic [ref=e47]: Couples Captured
+            - generic [ref=e48]:
+              - generic [ref=e49]: "12"
+              - generic [ref=e50]: Awards Won
+  - generic [ref=e51]:
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]: Offerings
+        - heading "Our Packages 撮影プラン" [level=2] [ref=e55]:
+          - text: Our Packages
+          - generic [ref=e56]: 撮影プラン
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - generic [ref=e62]: Intimate
+            - generic [ref=e63]: Sakura
+            - generic [ref=e64]:
+              - superscript [ref=e65]: $
+              - text: 1,500
+          - list [ref=e66]:
+            - listitem [ref=e67]: — 2 Hours Coverage
+            - listitem [ref=e68]: — 50+ Edited Photos
+            - listitem [ref=e69]: — Private Online Gallery
+            - listitem [ref=e70]: — Digital Downloads
+          - link "Select Plan" [ref=e71] [cursor=pointer]:
+            - /url: "#booking"
+        - generic [ref=e72]:
+          - generic [ref=e73]: Most Popular
+          - generic [ref=e74]:
+            - generic [ref=e75]: Classic
+            - generic [ref=e76]: Momiji
+            - generic [ref=e77]:
+              - superscript [ref=e78]: $
+              - text: 3,000
+          - list [ref=e79]:
+            - listitem [ref=e80]: — 6 Hours Coverage
+            - listitem [ref=e81]: — 150+ Edited Photos
+            - listitem [ref=e82]: — Gallery + Printed Album
+            - listitem [ref=e83]: — Engagement Session
+            - listitem [ref=e84]: — Two Photographers
+          - link "Select Plan" [ref=e85] [cursor=pointer]:
+            - /url: "#booking"
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - generic [ref=e88]: Premium
+            - generic [ref=e89]: Fuji
+            - generic [ref=e90]:
+              - superscript [ref=e91]: $
+              - text: 5,000
+          - list [ref=e92]:
+            - listitem [ref=e93]: — Full Day (10 hrs)
+            - listitem [ref=e94]: — 300+ Edited Photos
+            - listitem [ref=e95]: — Gallery + Luxury Album
+            - listitem [ref=e96]: — 2 Engagement Sessions
+            - listitem [ref=e97]: — Cinematic Highlight Reel
+            - listitem [ref=e98]: — Fine Art Prints
+          - link "Select Plan" [ref=e99] [cursor=pointer]:
+            - /url: "#booking"
+    - text: 料金
+  - generic [ref=e101]:
+    - generic [ref=e102]:
+      - generic [ref=e103]: Portfolio
+      - heading "Gallery ギャラリー" [level=2] [ref=e104]:
+        - text: Gallery
+        - generic [ref=e105]: ギャラリー
+    - generic [ref=e108]:
+      - generic [ref=e109] [cursor=pointer]:
+        - img "Cherry blossom path" [ref=e110]
+        - generic [ref=e112]: 桜の道
+      - generic [ref=e113] [cursor=pointer]:
+        - img "Japan scenery" [ref=e114]
+        - generic [ref=e116]: 日本の風景
+      - generic [ref=e117] [cursor=pointer]:
+        - img "Mount Fuji" [ref=e118]
+        - generic [ref=e120]: 富士山
+      - generic [ref=e121] [cursor=pointer]:
+        - img "Japanese temple" [ref=e122]
+        - generic [ref=e124]: 神社
+      - generic [ref=e125] [cursor=pointer]:
+        - img "Bridal portrait" [ref=e126]
+        - generic [ref=e128]: 花嫁
+      - generic [ref=e129] [cursor=pointer]:
+        - img "Tokyo lights" [ref=e130]
+        - generic [ref=e132]: 東京の夜
+  - generic [ref=e134]:
+    - generic [ref=e135]:
+      - generic [ref=e136]: Reserve
+      - heading "Book Your Session ご予約" [level=2] [ref=e137]:
+        - text: Book Your Session
+        - generic [ref=e138]: ご予約
+    - generic [ref=e142]:
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - generic [ref=e145]: Full Name *
+          - textbox "Full Name *" [ref=e146]
+        - generic [ref=e147]:
+          - generic [ref=e148]: Email *
+          - textbox "Email *" [ref=e149]
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - generic [ref=e152]: Phone *
+          - textbox "Phone *" [ref=e153]
+        - generic [ref=e154]:
+          - generic [ref=e155]: Number of People *
+          - spinbutton "Number of People *" [ref=e156]
+      - generic [ref=e157]:
+        - generic [ref=e158]:
+          - generic [ref=e159]: Preferred Date *
+          - textbox "Preferred Date *" [ref=e160]
+        - generic [ref=e161]:
+          - generic [ref=e162]: Preferred Time *
+          - textbox "Preferred Time *" [ref=e163]
+      - generic [ref=e164]:
+        - generic [ref=e165]:
+          - generic [ref=e166]: Package *
+          - combobox "Package *" [ref=e167]:
+            - option "Select a package" [selected]
+            - option "Sakura — $1,500"
+            - option "Momiji — $3,000"
+            - option "Fuji — $5,000"
+        - generic [ref=e168]:
+          - generic [ref=e169]: Location *
+          - textbox "Location *" [ref=e170]:
+            - /placeholder: e.g., Kyoto, Tokyo, Venue name
+      - generic [ref=e171]:
+        - generic [ref=e172]: Message / Special Requests
+        - textbox "Message / Special Requests" [ref=e173]:
+          - /placeholder: Share your vision with us...
+      - button "Send Enquiry — ご予約" [ref=e174] [cursor=pointer]
+  - generic [ref=e176]:
+    - generic [ref=e177]:
+      - generic [ref=e178]: Contact
+      - heading "Get In Touch お問い合わせ" [level=2] [ref=e179]:
+        - text: Get In Touch
+        - generic [ref=e180]: お問い合わせ
+    - generic [ref=e183]:
+      - generic [ref=e184]:
+        - generic [ref=e185]: 所
+        - heading "Address" [level=4] [ref=e186]
+        - paragraph [ref=e187]:
+          - text: 1-2-3 Hanayome Street
+          - text: Shinjuku, Tokyo 160-0001
+      - generic [ref=e188]:
+        - generic [ref=e189]: 話
+        - heading "Phone" [level=4] [ref=e190]
+        - paragraph [ref=e191]:
+          - link "+81 3-1234-5678" [ref=e192] [cursor=pointer]:
+            - /url: tel:+81312345678
+      - generic [ref=e193]:
+        - generic [ref=e194]: 信
+        - heading "Email" [level=4] [ref=e195]
+        - paragraph [ref=e196]:
+          - link "hello@hanayome.jp" [ref=e197] [cursor=pointer]:
+            - /url: mailto:hello@hanayome.jp
+  - contentinfo [ref=e198]:
+    - paragraph [ref=e199]: © 2024 花嫁 Hanayome · Bridal Photography · All Rights Reserved

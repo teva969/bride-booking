@@ -1,35 +1,112 @@
 # GitHub Push & Deploy
 
-Complete GitHub deployment workflow. The user will provide the GitHub repo URL/code if needed.
+Push this project to GitHub, generate a README with a live screenshot, deploy via GitHub Pages, and update the repo's About section.
 
-## Steps
+**Usage:** `/github-push <github-repo-url>`
 
-### 1. Push to GitHub
+The user must pass their GitHub repo URL as `$ARGUMENTS` (e.g. `https://github.com/username/repo`). If no argument is given, stop and ask for it before continuing.
 
-Check git status. If there are uncommitted changes, stage and commit them with a descriptive message, then push to `origin main`. If already up to date, make an empty commit to trigger the workflow:
+---
+
+## Step 1 — Set up the remote
+
+Parse `OWNER` and `REPO` from `$ARGUMENTS`.
+
+Check whether `origin` is already set:
+```bash
+git remote get-url origin 2>/dev/null
+```
+
+- If missing → `git remote add origin $ARGUMENTS`
+- If pointing elsewhere → `git remote set-url origin $ARGUMENTS`
+
+---
+
+## Step 2 — Push to GitHub
+
+Stage all changes, commit, and push:
 
 ```bash
 git add -A
-git commit -m "<descriptive message>"
+git commit -m "Initial commit" --allow-empty
+git push -u origin main
+```
+
+If `gh` CLI is not authenticated, stop and tell the user to run `gh auth login`.
+
+---
+
+## Step 3 — Take a screenshot with Playwright MCP
+
+Start the local server if it is not already running:
+```bash
+python3 -m http.server 8080 &
+sleep 2
+```
+
+Use the **Playwright MCP** tool to:
+1. Navigate to `http://localhost:8080`
+2. Take a full-page screenshot
+3. Save it as `screenshot.png` in the repo root
+
+---
+
+## Step 4 — Write README.md
+
+Create `README.md` in the repo root with **all** of the following sections in order:
+
+### Badges
+Shields.io badges for every technology used, e.g.:
+
+```markdown
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github&logoColor=white)
+```
+
+### About the Project
+What the site is, who it is for, and its key features. Write 3–5 sentences specific to this codebase.
+
+### Screenshot
+```markdown
+![Screenshot](screenshot.png)
+```
+
+### File Structure
+Run `find . -not -path '*/.git/*' -not -name '.DS_Store' | sort` and render the output as a code block.
+
+### How to Use
+Step-by-step instructions:
+1. Clone the repo
+2. `python3 -m http.server 8080` then open `http://localhost:8080`
+3. How to change the contact email (update the `fetch` URL in `index.html`)
+4. How to swap photos (replace Unsplash URLs)
+5. How to change colours (edit CSS custom properties at the top of `<style>`)
+6. Note about formsubmit.co activation email on first submission
+
+### Live Site
+```markdown
+[View Live Site](https://<OWNER>.github.io/<REPO>/)
+```
+
+---
+
+## Step 5 — Commit and push README + screenshot
+
+```bash
+git add README.md screenshot.png
+git commit -m "Add README with screenshot"
 git push origin main
 ```
 
-### 2. Create / Update README
+---
 
-Generate a comprehensive `README.md` for the project with the following sections — do NOT skip any:
+## Step 6 — Create GitHub Actions workflow
 
-- **Badges** — tech stack badges using shields.io (HTML5, CSS3, JavaScript, GitHub Pages, etc.)
-- **About the Project** — what the site is, who it's for, key features
-- **Screenshot** — use the Playwright MCP tool to take a full-page screenshot of the live site (`https://<username>.github.io/<repo>/`) and embed it in the README as `![Screenshot](screenshot.png)`. Save the screenshot as `screenshot.png` in the repo root.
-- **File Structure** — directory tree of the repo
-- **How to Use** — local dev instructions (python3 -m http.server 8080), form submission notes, how to customise images/colours
-- **Live Site** — link to the GitHub Pages URL
+Check whether `.github/workflows/deploy.yml` already exists. If it does, skip this step.
 
-Commit and push the README (and screenshot) after writing it.
-
-### 3. Create GitHub Actions Workflow for GitHub Pages
-
-Check if `.github/workflows/deploy.yml` already exists. If not, create it:
+If not, create it:
 
 ```yaml
 name: Deploy to GitHub Pages
@@ -68,26 +145,33 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-Commit and push if newly created. Remind the user to enable GitHub Pages under **Settings → Pages → Source → GitHub Actions** if not already done.
-
-### 4. Update GitHub Repo About & Add Live Site URL
-
-Use the GitHub CLI to update the repository description and homepage URL:
-
+Commit and push if newly created:
 ```bash
-gh repo edit <owner>/<repo> \
-  --description "<short description of the project>" \
-  --homepage "https://<owner>.github.io/<repo>/"
+git add .github/workflows/deploy.yml
+git commit -m "Add GitHub Actions workflow for GitHub Pages"
+git push origin main
 ```
 
-Derive the owner and repo from `git remote get-url origin`.
+Tell the user to enable GitHub Pages at:
+`https://github.com/<OWNER>/<REPO>/settings/pages` → Source → **GitHub Actions**
 
-### 5. Verify Live Site
+---
 
-Fetch the live GitHub Pages URL and confirm it returns the expected content (not a 404).
+## Step 7 — Update repo About
 
-## Notes
+```bash
+gh repo edit <OWNER>/<REPO> \
+  --description "<one-line description written from the README About section>" \
+  --homepage "https://<OWNER>.github.io/<REPO>/"
+```
 
-- Always derive the GitHub username and repo name from `git remote get-url origin` — never hardcode them.
-- If `gh` CLI is not authenticated, prompt the user to run `! gh auth login`.
-- After all steps complete, report the live URL and confirm everything is deployed.
+---
+
+## Step 8 — Confirm live site
+
+Wait ~60 seconds, then check:
+```bash
+curl -sI "https://<OWNER>.github.io/<REPO>/" | head -1
+```
+
+Report the result and print the live URL for the user.

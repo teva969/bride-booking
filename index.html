@@ -1,764 +1,1281 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eternal Moments - Bridal Photography</title>
+    <title>花嫁 · Hanayome — Japanese Bridal Photography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Playfair Display', Georgia, serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fff;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --blush: #f5e6e0;
-            --rose: #e8b4a8;
-            --dark-rose: #c97d73;
-            --gold: #d4af37;
-            --cream: #faf8f3;
-            --dark-text: #3a3a3a;
+            --washi:       #FAF7F2;
+            --sakura-pale: #F9EEF1;
+            --sakura:      #D4899A;
+            --deep-sakura: #A85C6F;
+            --sumi:        #1C1C1E;
+            --sumi-mid:    #4A4A4A;
+            --gold:        #B89A3E;
+            --gold-light:  #D4B866;
+            --mist:        #9BA8B0;
+            --nav-h:       64px;
         }
 
-        /* Navigation */
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Cormorant Garamond', 'Noto Serif JP', Georgia, serif;
+            line-height: 1.7;
+            color: var(--sumi);
+            background: var(--washi);
+            overflow-x: hidden;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--washi); }
+        ::-webkit-scrollbar-thumb { background: var(--sakura); border-radius: 2px; }
+
+        /* ── NAVIGATION ── */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            background: rgba(250, 247, 242, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 137, 154, 0.18);
             z-index: 1000;
-            padding: 1rem 2rem;
+            transition: background 0.4s;
         }
 
-        nav .container {
-            max-width: 1200px;
+        .nav-inner {
+            max-width: 1160px;
             margin: 0 auto;
+            padding: 0 1.5rem;
+            height: 100%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
 
-        nav .logo {
-            font-size: 1.8rem;
-            color: var(--dark-rose);
-            font-weight: bold;
-            letter-spacing: 2px;
+        .logo {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+        .logo-ja {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--deep-sakura);
+            letter-spacing: 4px;
+        }
+        .logo-en {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.65rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: var(--mist);
+            text-transform: uppercase;
         }
 
-        nav ul {
+        .nav-links {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 2.4rem;
         }
-
-        nav a {
+        .nav-links a {
             text-decoration: none;
-            color: var(--dark-text);
-            font-size: 0.95rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.92rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--sumi-mid);
             transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--deep-sakura); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* hamburger */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            background: none; border: none;
+        }
+        .burger span {
+            display: block;
+            width: 24px; height: 1.5px;
+            background: var(--sumi);
+            transition: all 0.3s;
+            transform-origin: center;
+        }
+        .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .burger.open span:nth-child(2) { opacity: 0; }
+        .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: var(--nav-h); left: 0; right: 0;
+            background: rgba(250, 247, 242, 0.97);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(212, 137, 154, 0.18);
+            padding: 2rem 1.5rem;
+            z-index: 999;
+            transform: translateY(-8px);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .mobile-menu.open {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--sumi);
         }
 
-        nav a:hover {
-            color: var(--gold);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Hero Section */
+        /* ── HERO ── */
         .hero {
-            background: linear-gradient(135deg, rgba(232, 180, 168, 0.9) 0%, rgba(245, 230, 224, 0.9) 100%),
-                        url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=600&fit=crop') center/cover;
+            position: relative;
             height: 100vh;
+            min-height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            color: white;
-            margin-top: 60px;
+            overflow: hidden;
+            margin-top: var(--nav-h);
         }
 
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            letter-spacing: 2px;
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1522748906645-95d8adfd52c7?w=1600&h=1000&fit=crop');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.04);
+            animation: heroZoom 14s ease-out forwards;
+        }
+        @keyframes heroZoom {
+            from { transform: scale(1.04); }
+            to   { transform: scale(1); }
         }
 
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(28, 28, 30, 0.35) 0%,
+                rgba(28, 28, 30, 0.20) 50%,
+                rgba(28, 28, 30, 0.55) 100%
+            );
         }
 
-        .cta-button {
-            background: var(--gold);
-            color: var(--dark-text);
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: bold;
-            letter-spacing: 1px;
+        /* floating petals */
+        .petals { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .petal {
+            position: absolute;
+            top: -20px;
+            width: 10px; height: 10px;
+            background: #F9D0DA;
+            border-radius: 100% 5% 100% 5%;
+            opacity: 0;
+            animation: petalFall linear infinite;
+        }
+        .petal:nth-child(1)  { left: 8%;  width:8px;  height:8px;  animation-duration:8s;  animation-delay:0s;   }
+        .petal:nth-child(2)  { left:16%;  width:12px; height:12px; animation-duration:11s; animation-delay:1.5s; }
+        .petal:nth-child(3)  { left:26%;  width:7px;  height:7px;  animation-duration:9s;  animation-delay:3s;   }
+        .petal:nth-child(4)  { left:37%;  width:11px; height:11px; animation-duration:12s; animation-delay:0.8s; }
+        .petal:nth-child(5)  { left:48%;  width:9px;  height:9px;  animation-duration:10s; animation-delay:2.2s; }
+        .petal:nth-child(6)  { left:58%;  width:13px; height:13px; animation-duration:8.5s;animation-delay:4s;   }
+        .petal:nth-child(7)  { left:68%;  width:8px;  height:8px;  animation-duration:11s; animation-delay:1s;   }
+        .petal:nth-child(8)  { left:76%;  width:10px; height:10px; animation-duration:9.5s;animation-delay:3.5s; }
+        .petal:nth-child(9)  { left:85%;  width:7px;  height:7px;  animation-duration:10s; animation-delay:2s;   }
+        .petal:nth-child(10) { left:93%;  width:12px; height:12px; animation-duration:13s; animation-delay:0.5s; }
+        @keyframes petalFall {
+            0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+            5%   { opacity: 0.7; }
+            90%  { opacity: 0.4; }
+            100% { transform: translateY(105vh) rotate(540deg) translateX(60px); opacity: 0; }
         }
 
-        .cta-button:hover {
-            background: var(--dark-rose);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(201, 125, 115, 0.3);
+        /* big Japanese char watermark */
+        .hero-kanji {
+            position: absolute;
+            right: 6vw;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(140px, 18vw, 260px);
+            font-weight: 300;
+            color: rgba(255,255,255,0.06);
+            line-height: 1;
+            writing-mode: vertical-rl;
+            user-select: none;
+            pointer-events: none;
         }
 
-        /* About Section */
-        .about {
-            padding: 5rem 2rem;
-            background: var(--cream);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--dark-rose);
-            margin-bottom: 3rem;
+        .hero-content {
             position: relative;
-            padding-bottom: 1rem;
+            text-align: center;
+            color: white;
+            padding: 0 1.5rem;
         }
-
-        .section-title::after {
+        .hero-sub-ja {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+            font-weight: 300;
+            letter-spacing: 8px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            transform: translateY(14px);
+            animation: fadeUp 1s 0.4s ease-out forwards;
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 300;
+            letter-spacing: 4px;
+            line-height: 1.15;
+            margin-bottom: 0.8rem;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 1s 0.7s ease-out forwards;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: #F9D0DA;
+        }
+        .hero-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1rem, 2.2vw, 1.3rem);
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(14px);
+            animation: fadeUp 1s 1s ease-out forwards;
+        }
+        .hero-cta {
+            display: inline-block;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.5);
+            color: white;
+            padding: 0.85rem 2.8rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            opacity: 0;
+            animation: fadeUp 1s 1.3s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-cta::before {
             content: '';
             position: absolute;
-            width: 60px;
-            height: 3px;
-            background: var(--gold);
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            inset: 0;
+            background: rgba(255,255,255,0);
+            transition: background 0.4s;
+        }
+        .hero-cta:hover {
+            border-color: var(--gold-light);
+            color: var(--sumi);
+            background: var(--gold-light);
         }
 
-        .about-content {
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUp 1s 2s ease-out forwards;
+        }
+        .scroll-indicator span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+        .scroll-line {
+            width: 1px;
+            height: 36px;
+            background: rgba(255,255,255,0.3);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+        @keyframes scrollPulse {
+            0%, 100% { transform: scaleY(1); opacity: 0.5; }
+            50%       { transform: scaleY(0.5); opacity: 1; }
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── SECTION SHARED ── */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-label {
+            display: block;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.72rem;
+            letter-spacing: 6px;
+            color: var(--sakura);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--sumi);
+        }
+        .section-title-ja {
+            display: block;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: var(--mist);
+            letter-spacing: 4px;
+            margin-top: 0.4rem;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            justify-content: center;
+            margin: 1.2rem 0 0;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            display: block;
+            width: 40px; height: 1px;
+            background: var(--gold);
+        }
+        .divider-dot {
+            width: 4px; height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .container {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ── ABOUT ── */
+        .about {
+            padding: clamp(4rem, 8vw, 7rem) 0;
+            background: white;
+            position: relative;
+        }
+        .about::before {
+            content: '物語';
+            position: absolute;
+            left: -0.02em;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(100px, 12vw, 180px);
+            font-weight: 700;
+            color: rgba(212, 137, 154, 0.04);
+            line-height: 1;
+            writing-mode: vertical-rl;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: clamp(2rem, 5vw, 5rem);
             align-items: center;
         }
 
-        .about-text h3 {
-            font-size: 1.8rem;
-            color: var(--dark-rose);
-            margin-bottom: 1rem;
+        .about-img-wrap {
+            position: relative;
         }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            color: #555;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-        }
-
-        .about-image img {
+        .about-img-wrap img {
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            height: clamp(360px, 50vw, 540px);
+            object-fit: cover;
+            display: block;
+        }
+        .about-img-accent {
+            position: absolute;
+            top: -16px; right: -16px;
+            width: 60%; height: 60%;
+            border: 1px solid rgba(212, 137, 154, 0.3);
+            pointer-events: none;
+        }
+        .about-img-label {
+            position: absolute;
+            bottom: 1.5rem; left: -1.5rem;
+            background: var(--sumi);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            writing-mode: vertical-rl;
         }
 
-        /* Packages Section */
+        .about-text h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+        .about-text h3 em {
+            font-style: italic;
+            color: var(--sakura);
+        }
+        .about-text p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--sumi-mid);
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(212, 137, 154, 0.2);
+        }
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: var(--deep-sakura);
+            line-height: 1;
+        }
+        .stat-label {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: var(--mist);
+            margin-top: 0.3rem;
+        }
+
+        /* ── PACKAGES ── */
         .packages {
-            padding: 5rem 2rem;
-            background: white;
+            padding: clamp(4rem, 8vw, 7rem) 0;
+            background: var(--sakura-pale);
+            position: relative;
+            overflow: hidden;
+        }
+        .packages::after {
+            content: '料金';
+            position: absolute;
+            right: -0.05em;
+            bottom: -0.1em;
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(100px, 14vw, 200px);
+            font-weight: 700;
+            color: rgba(212, 137, 154, 0.05);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
         }
 
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .package-card {
-            background: var(--blush);
-            padding: 2.5rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .package-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gold);
-        }
-
-        .package-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            border-color: var(--gold);
-        }
-
-        .package-card h3 {
-            font-size: 1.8rem;
-            color: var(--dark-rose);
-            margin-bottom: 0.5rem;
-        }
-
-        .package-price {
-            font-size: 2rem;
-            color: var(--gold);
-            margin: 1rem 0;
-            font-weight: bold;
-        }
-
-        .package-features {
-            list-style: none;
-            margin: 1.5rem 0;
-            text-align: left;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        .package-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .package-features li:last-child {
-            border-bottom: none;
-        }
-
-        .package-features li::before {
-            content: '✓ ';
-            color: var(--gold);
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        /* Gallery Section */
-        .gallery {
-            padding: 5rem 2rem;
-            background: var(--cream);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-top: 3rem;
         }
 
-        .gallery-item {
+        .pkg-card {
+            background: white;
+            padding: 2.8rem 2rem;
             position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            height: 300px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.35s, box-shadow 0.35s;
+            border: 1px solid rgba(212, 137, 154, 0.12);
+        }
+        .pkg-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(168, 92, 111, 0.12);
+        }
+        .pkg-card.featured {
+            background: var(--sumi);
+            color: white;
+            border-color: var(--sumi);
+        }
+        .pkg-badge {
+            position: absolute;
+            top: -1px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--sumi);
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            padding: 0.3rem 1rem;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .pkg-card-top {
+            border-bottom: 1px solid rgba(212, 137, 154, 0.18);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .pkg-card.featured .pkg-card-top {
+            border-color: rgba(255,255,255,0.12);
+        }
+        .pkg-label {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.68rem;
+            letter-spacing: 4px;
+            color: var(--sakura);
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+        .pkg-card.featured .pkg-label { color: var(--gold-light); }
+        .pkg-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        .pkg-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: var(--deep-sakura);
+            margin-top: 0.5rem;
+            line-height: 1;
+        }
+        .pkg-card.featured .pkg-price { color: var(--gold-light); }
+        .pkg-price sup {
+            font-size: 1.2rem;
+            vertical-align: super;
+        }
+        .pkg-features {
+            list-style: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 300;
+        }
+        .pkg-features li {
+            padding: 0.55rem 0;
+            border-bottom: 1px solid rgba(212, 137, 154, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--sumi-mid);
+        }
+        .pkg-card.featured .pkg-features li {
+            border-color: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.75);
+        }
+        .pkg-features li::before {
+            content: '—';
+            color: var(--gold);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .pkg-features li:last-child { border-bottom: none; }
+        .pkg-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 2rem;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--deep-sakura);
+            color: var(--deep-sakura);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .pkg-btn:hover {
+            background: var(--deep-sakura);
+            color: white;
+        }
+        .pkg-card.featured .pkg-btn {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .pkg-card.featured .pkg-btn:hover {
+            background: var(--gold);
+            color: var(--sumi);
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Booking Form Section */
-        .booking {
-            padding: 5rem 2rem;
+        /* ── GALLERY ── */
+        .gallery {
+            padding: clamp(4rem, 8vw, 7rem) 0;
             background: white;
         }
 
-        .form-container {
-            max-width: 700px;
-            margin: 3rem auto;
-            background: var(--blush);
-            padding: 3rem;
-            border-radius: 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        .gallery-grid {
+            columns: 3;
+            column-gap: 12px;
+            margin-top: 3rem;
         }
-
-        .form-group {
-            margin-bottom: 1.5rem;
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
         }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--dark-rose);
-            font-weight: bold;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .gallery-item img {
             width: 100%;
-            padding: 0.8rem;
-            border: 2px solid rgba(201, 125, 115, 0.3);
-            border-radius: 5px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .gallery-item:hover img { transform: scale(1.04); }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(28,28,30,0.6) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.2rem;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay span {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.8);
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        /* ── BOOKING ── */
+        .booking {
+            padding: clamp(4rem, 8vw, 7rem) 0;
+            background: var(--sakura-pale);
+            position: relative;
+        }
+
+        .form-wrap {
+            max-width: 720px;
+            margin: 0 auto;
+            background: white;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            border: 1px solid rgba(212, 137, 154, 0.15);
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 1.2rem;
         }
-
+        .form-group {
+            margin-bottom: 1.4rem;
+        }
+        .form-group label {
+            display: block;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            color: var(--sumi-mid);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(212, 137, 154, 0.3);
+            border-radius: 0;
+            background: var(--washi);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--sumi);
+            transition: border-color 0.3s, background 0.3s;
+            -webkit-appearance: none;
+        }
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A85C6F' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--sakura);
+            background: white;
+        }
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 110px;
         }
-
         .submit-btn {
             width: 100%;
-            background: var(--gold);
-            color: var(--dark-text);
             padding: 1rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            background: var(--dark-rose);
+            background: var(--sumi);
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(201, 125, 115, 0.3);
+            border: none;
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            transition: background 0.3s;
         }
-
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .submit-btn:hover { background: var(--deep-sakura); }
+        .submit-btn:disabled { background: var(--mist); cursor: not-allowed; }
 
         .success-message {
             display: none;
-            background: #4caf50;
-            color: white;
-            padding: 1.5rem;
-            border-radius: 5px;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background: rgba(139, 195, 74, 0.1);
+            border: 1px solid rgba(139, 195, 74, 0.3);
             text-align: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: #558B2F;
         }
-
         .success-message.show {
             display: block;
-            animation: slideIn 0.5s ease-out;
+            animation: fadeUp 0.5s ease-out forwards;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Contact Section */
+        /* ── CONTACT ── */
         .contact {
-            padding: 5rem 2rem;
-            background: var(--blush);
-            text-align: center;
+            padding: clamp(3.5rem, 7vw, 6rem) 0;
+            background: var(--sumi);
+            color: white;
         }
+        .contact .section-label { color: var(--gold-light); }
+        .contact .section-title { color: white; }
+        .contact .divider::before,
+        .contact .divider::after { background: var(--gold-light); }
+        .contact .divider-dot { background: var(--gold-light); }
+        .contact .section-title-ja { color: rgba(255,255,255,0.35); }
 
-        .contact-info {
+        .contact-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 3.5rem;
+            text-align: center;
         }
-
+        .contact-item-icon {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.3rem;
+            color: var(--gold-light);
+            margin-bottom: 0.8rem;
+        }
         .contact-item h4 {
-            color: var(--dark-rose);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.78rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            font-weight: 300;
+            margin-bottom: 0.6rem;
         }
-
         .contact-item p {
-            color: #555;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.7;
         }
-
         .contact-item a {
-            color: var(--gold);
+            color: var(--gold-light);
             text-decoration: none;
             transition: color 0.3s;
         }
+        .contact-item a:hover { color: white; }
 
-        .contact-item a:hover {
-            color: var(--dark-rose);
-        }
-
-        /* Footer */
+        /* ── FOOTER ── */
         footer {
-            background: var(--dark-rose);
-            color: white;
+            background: #111;
+            color: rgba(255,255,255,0.3);
             text-align: center;
-            padding: 2rem;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 1.8rem;
+        }
+        footer p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82rem;
+            letter-spacing: 3px;
+        }
+        footer span {
+            color: var(--gold);
         }
 
-        /* Responsive */
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+            .gallery-grid { columns: 2; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-img-wrap { order: -1; }
+            .about-img-label { display: none; }
+            .about-img-accent { display: none; }
+            .about-stats { grid-template-columns: repeat(3, 1fr); }
+        }
+
         @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .packages-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
+            .nav-links { display: none; }
+            .burger { display: flex; }
+            .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .gallery-grid { columns: 2; }
+            .hero-kanji { display: none; }
         }
+
+        @media (max-width: 540px) {
+            .form-row { grid-template-columns: 1fr; }
+            .gallery-grid { columns: 1; }
+            .about-stats { grid-template-columns: 1fr; gap: 1rem; }
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="logo">✨ Eternal Moments</div>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#packages">Packages</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#booking">Book Now</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Capture Your Love Story</h1>
-            <p>Timeless bridal photography that celebrates your unique journey</p>
-            <a href="#booking" class="cta-button">Schedule Your Session</a>
+<!-- ── NAVIGATION ── -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">
+            <span class="logo-ja">花嫁</span>
+            <span class="logo-en">Hanayome · Bridal</span>
         </div>
-    </section>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#booking">Book Now</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="burger" id="burger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Us</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Your Story, Beautifully Told</h3>
-                    <p>With over a decade of experience capturing precious moments, we specialize in creating stunning bridal photography that reflects your personality and style.</p>
-                    <p>Our approach combines timeless elegance with contemporary artistry, ensuring your wedding photos will be cherished for generations to come.</p>
-                    <p>We believe every bride deserves photography as unique and beautiful as she is. Let us help you preserve the magic of your special day.</p>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&h=600&fit=crop" alt="Bridal Photography">
+<div class="mobile-menu" id="mobileMenu">
+    <ul>
+        <li><a href="#about" class="mobile-nav-link">About</a></li>
+        <li><a href="#packages" class="mobile-nav-link">Packages</a></li>
+        <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
+        <li><a href="#booking" class="mobile-nav-link">Book Now</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+    </ul>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="petals">
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div>
+    </div>
+    <div class="hero-kanji">花嫁</div>
+    <div class="hero-content">
+        <p class="hero-sub-ja">美しい瞬間を永遠に</p>
+        <h1 class="hero-title">Your Love Story,<br><em>Forever in Bloom</em></h1>
+        <p class="hero-desc">Japanese bridal photography — refined, timeless, unforgettable</p>
+        <a href="#booking" class="hero-cta">Schedule Your Session</a>
+    </div>
+    <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-label">Our Story</span>
+            <h2 class="section-title">
+                Wabi-Sabi Beauty
+                <span class="section-title-ja">侘び寂びの美しさ</span>
+            </h2>
+            <div class="divider"><div class="divider-dot"></div></div>
+        </div>
+        <div class="about-grid">
+            <div class="about-img-wrap reveal">
+                <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=600&h=780&fit=crop" alt="Cherry blossom bridal portrait">
+                <div class="about-img-accent"></div>
+                <div class="about-img-label">花の美</div>
+            </div>
+            <div class="about-text">
+                <h3 class="reveal">Where <em>cherry blossoms</em><br>meet eternal love</h3>
+                <p class="reveal reveal-delay-1">Inspired by the Japanese philosophy of <em>mono no aware</em> — the bittersweet beauty of fleeting moments — we capture your wedding day with the sensitivity and artistry it deserves.</p>
+                <p class="reveal reveal-delay-2">Each session is choreographed like a carefully composed haiku: nothing excessive, everything intentional. We find poetry in a glance, a petal's fall, the soft light of a golden hour.</p>
+                <p class="reveal reveal-delay-3">With over a decade of experience photographing ceremonies across Japan and beyond, we bring a refined aesthetic eye to every frame.</p>
+                <div class="about-stats reveal">
+                    <div>
+                        <div class="stat-num">10+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div>
+                        <div class="stat-num">500+</div>
+                        <div class="stat-label">Couples Captured</div>
+                    </div>
+                    <div>
+                        <div class="stat-num">12</div>
+                        <div class="stat-label">Awards Won</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Packages Section -->
-    <section id="packages" class="packages">
-        <div class="container">
-            <h2 class="section-title">Our Packages</h2>
-            <div class="packages-grid">
-                <div class="package-card">
-                    <h3>Intimate</h3>
-                    <div class="package-price">$1,500</div>
-                    <ul class="package-features">
-                        <li>2 Hours Coverage</li>
-                        <li>50+ High-Res Photos</li>
-                        <li>Professional Editing</li>
-                        <li>Digital Gallery</li>
-                    </ul>
+<!-- ── PACKAGES ── -->
+<section id="packages" class="packages">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-label">Offerings</span>
+            <h2 class="section-title">
+                Our Packages
+                <span class="section-title-ja">撮影プラン</span>
+            </h2>
+            <div class="divider"><div class="divider-dot"></div></div>
+        </div>
+        <div class="packages-grid">
+            <div class="pkg-card reveal">
+                <div class="pkg-card-top">
+                    <div class="pkg-label">Intimate</div>
+                    <div class="pkg-name">Sakura</div>
+                    <div class="pkg-price"><sup>$</sup>1,500</div>
                 </div>
-                <div class="package-card">
-                    <h3>Classic</h3>
-                    <div class="package-price">$3,000</div>
-                    <ul class="package-features">
-                        <li>6 Hours Coverage</li>
-                        <li>150+ High-Res Photos</li>
-                        <li>Professional Editing</li>
-                        <li>Digital Gallery + Album</li>
-                        <li>Engagement Session</li>
-                    </ul>
+                <ul class="pkg-features">
+                    <li>2 Hours Coverage</li>
+                    <li>50+ Edited Photos</li>
+                    <li>Private Online Gallery</li>
+                    <li>Digital Downloads</li>
+                </ul>
+                <a href="#booking" class="pkg-btn">Select Plan</a>
+            </div>
+            <div class="pkg-card featured reveal reveal-delay-1">
+                <div class="pkg-badge">Most Popular</div>
+                <div class="pkg-card-top">
+                    <div class="pkg-label">Classic</div>
+                    <div class="pkg-name">Momiji</div>
+                    <div class="pkg-price"><sup>$</sup>3,000</div>
                 </div>
-                <div class="package-card">
-                    <h3>Premium</h3>
-                    <div class="package-price">$5,000</div>
-                    <ul class="package-features">
-                        <li>Full Day Coverage (10 hrs)</li>
-                        <li>300+ High-Res Photos</li>
-                        <li>Professional Editing</li>
-                        <li>Digital Gallery + Album</li>
-                        <li>2 Engagement Sessions</li>
-                        <li>Video Highlight Reel</li>
-                    </ul>
+                <ul class="pkg-features">
+                    <li>6 Hours Coverage</li>
+                    <li>150+ Edited Photos</li>
+                    <li>Gallery + Printed Album</li>
+                    <li>Engagement Session</li>
+                    <li>Two Photographers</li>
+                </ul>
+                <a href="#booking" class="pkg-btn">Select Plan</a>
+            </div>
+            <div class="pkg-card reveal reveal-delay-2">
+                <div class="pkg-card-top">
+                    <div class="pkg-label">Premium</div>
+                    <div class="pkg-name">Fuji</div>
+                    <div class="pkg-price"><sup>$</sup>5,000</div>
                 </div>
+                <ul class="pkg-features">
+                    <li>Full Day (10 hrs)</li>
+                    <li>300+ Edited Photos</li>
+                    <li>Gallery + Luxury Album</li>
+                    <li>2 Engagement Sessions</li>
+                    <li>Cinematic Highlight Reel</li>
+                    <li>Fine Art Prints</li>
+                </ul>
+                <a href="#booking" class="pkg-btn">Select Plan</a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery">
-        <div class="container">
-            <h2 class="section-title">Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=500&fit=crop" alt="Bridal Portrait">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=500&fit=crop" alt="Wedding Dress Detail">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1537633552985-caf2f5c90d65?w=400&h=500&fit=crop" alt="Bride and Groom">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=400&h=500&fit=crop" alt="Wedding Moment">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1465014925944-59800890c3ff?w=400&h=500&fit=crop" alt="Bride Smiling">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=500&fit=crop" alt="Wedding Rings">
-                </div>
+<!-- ── GALLERY ── -->
+<section id="gallery" class="gallery">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-label">Portfolio</span>
+            <h2 class="section-title">
+                Gallery
+                <span class="section-title-ja">ギャラリー</span>
+            </h2>
+            <div class="divider"><div class="divider-dot"></div></div>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1522748906645-95d8adfd52c7?w=500&h=650&fit=crop" alt="Cherry blossom path">
+                <div class="gallery-overlay"><span>桜の道</span></div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-1">
+                <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=500&h=400&fit=crop" alt="Japan scenery">
+                <div class="gallery-overlay"><span>日本の風景</span></div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-2">
+                <img src="https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=500&h=600&fit=crop" alt="Mount Fuji">
+                <div class="gallery-overlay"><span>富士山</span></div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=500&h=380&fit=crop" alt="Japanese temple">
+                <div class="gallery-overlay"><span>神社</span></div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-1">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&h=600&fit=crop" alt="Bridal portrait">
+                <div class="gallery-overlay"><span>花嫁</span></div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-2">
+                <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=500&h=420&fit=crop" alt="Tokyo lights">
+                <div class="gallery-overlay"><span>東京の夜</span></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Booking Form Section -->
-    <section id="booking" class="booking">
-        <div class="container">
-            <h2 class="section-title">Book Your Session</h2>
-            <div class="form-container">
-                <form id="bookingForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="fullName">Full Name *</label>
-                            <input type="text" id="fullName" name="fullName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">Phone *</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="numPeople">Number of People *</label>
-                            <input type="number" id="numPeople" name="numPeople" min="1" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="prefDate">Preferred Date *</label>
-                            <input type="date" id="prefDate" name="prefDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="prefTime">Preferred Time *</label>
-                            <input type="time" id="prefTime" name="prefTime" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="package">Package *</label>
-                            <select id="package" name="package" required>
-                                <option value="">Select a package</option>
-                                <option value="Intimate - $1,500">Intimate - $1,500</option>
-                                <option value="Classic - $3,000">Classic - $3,000</option>
-                                <option value="Premium - $5,000">Premium - $5,000</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="location">Location *</label>
-                            <input type="text" id="location" name="location" placeholder="e.g., Downtown, Venue Name" required>
-                        </div>
-                    </div>
-
+<!-- ── BOOKING ── -->
+<section id="booking" class="booking">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-label">Reserve</span>
+            <h2 class="section-title">
+                Book Your Session
+                <span class="section-title-ja">ご予約</span>
+            </h2>
+            <div class="divider"><div class="divider-dot"></div></div>
+        </div>
+        <div class="form-wrap reveal">
+            <form id="bookingForm">
+                <div class="form-row">
                     <div class="form-group">
-                        <label for="message">Message / Special Requests</label>
-                        <textarea id="message" name="message" placeholder="Tell us more about your vision..."></textarea>
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required>
                     </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="numPeople">Number of People *</label>
+                        <input type="number" id="numPeople" name="numPeople" min="1" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="prefDate">Preferred Date *</label>
+                        <input type="date" id="prefDate" name="prefDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prefTime">Preferred Time *</label>
+                        <input type="time" id="prefTime" name="prefTime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="package">Package *</label>
+                        <select id="package" name="package" required>
+                            <option value="">Select a package</option>
+                            <option value="Sakura - $1,500">Sakura — $1,500</option>
+                            <option value="Momiji - $3,000">Momiji — $3,000</option>
+                            <option value="Fuji - $5,000">Fuji — $5,000</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <input type="text" id="location" name="location" placeholder="e.g., Kyoto, Tokyo, Venue name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message / Special Requests</label>
+                    <textarea id="message" name="message" placeholder="Share your vision with us..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Enquiry — ご予約</button>
+                <div class="success-message" id="successMessage">
+                    ありがとうございます — Thank you! Your booking request has been received. We will be in touch shortly.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
-                    <button type="submit" class="submit-btn">Book Now</button>
-                    <div class="success-message" id="successMessage">
-                        ✓ Thank you! Your booking request has been sent successfully. We'll contact you soon to confirm your session.
-                    </div>
-                </form>
+<!-- ── CONTACT ── -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-label">Contact</span>
+            <h2 class="section-title">
+                Get In Touch
+                <span class="section-title-ja">お問い合わせ</span>
+            </h2>
+            <div class="divider"><div class="divider-dot"></div></div>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-item reveal">
+                <div class="contact-item-icon">所</div>
+                <h4>Address</h4>
+                <p>1-2-3 Hanayome Street<br>Shinjuku, Tokyo 160-0001</p>
+            </div>
+            <div class="contact-item reveal reveal-delay-1">
+                <div class="contact-item-icon">話</div>
+                <h4>Phone</h4>
+                <p><a href="tel:+81312345678">+81 3-1234-5678</a></p>
+            </div>
+            <div class="contact-item reveal reveal-delay-2">
+                <div class="contact-item-icon">信</div>
+                <h4>Email</h4>
+                <p><a href="mailto:hello@hanayome.jp">hello@hanayome.jp</a></p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h4>📍 Address</h4>
-                    <p>123 Photography Lane<br>New York, NY 10001</p>
-                </div>
-                <div class="contact-item">
-                    <h4>📞 Phone</h4>
-                    <p><a href="tel:+12125551234">(212) 555-1234</a></p>
-                </div>
-                <div class="contact-item">
-                    <h4>✉️ Email</h4>
-                    <p><a href="mailto:hello@eternalmoments.com">hello@eternalmoments.com</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ── FOOTER ── -->
+<footer>
+    <p>&copy; 2024 <span>花嫁 Hanayome</span> · Bridal Photography · All Rights Reserved</p>
+</footer>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Eternal Moments Photography. All rights reserved. ✨</p>
-    </footer>
+<script>
+    // ── HAMBURGER MENU ──
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => {
+        burger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            burger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+        });
+    });
 
-    <script>
-        const bookingForm = document.getElementById('bookingForm');
-        const successMessage = document.getElementById('successMessage');
-
-        bookingForm.addEventListener('submit', async (e) => {
+    // ── SMOOTH SCROLL ──
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
-
-            // Collect form data
-            const formData = {
-                fullName: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                prefDate: document.getElementById('prefDate').value,
-                prefTime: document.getElementById('prefTime').value,
-                package: document.getElementById('package').value,
-                location: document.getElementById('location').value,
-                numPeople: document.getElementById('numPeople').value,
-                message: document.getElementById('message').value
-            };
-
-            // Show loading state
-            const submitBtn = bookingForm.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-
-            try {
-                // Send to formsubmit.co
-                const response = await fetch('https://formsubmit.co/ajax/qingru@gmail.com', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    // Show success message
-                    successMessage.classList.add('show');
-                    bookingForm.reset();
-
-                    // Hide success message after 5 seconds
-                    setTimeout(() => {
-                        successMessage.classList.remove('show');
-                    }, 5000);
-                } else {
-                    alert('There was an error submitting your form. Please try again.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('There was an error submitting your form. Please try again.');
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'));
+                const top = target.getBoundingClientRect().top + window.scrollY - navH;
+                window.scrollTo({ top, behavior: 'smooth' });
             }
         });
+    });
 
-        // Smooth scroll behavior for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+    // ── SCROLL REVEAL ──
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
         });
-    </script>
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── BOOKING FORM ──
+    const bookingForm = document.getElementById('bookingForm');
+    const successMessage = document.getElementById('successMessage');
+
+    bookingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            prefDate: document.getElementById('prefDate').value,
+            prefTime: document.getElementById('prefTime').value,
+            package: document.getElementById('package').value,
+            location: document.getElementById('location').value,
+            numPeople: document.getElementById('numPeople').value,
+            message: document.getElementById('message').value
+        };
+        const submitBtn = bookingForm.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = '送信中... Sending...';
+        submitBtn.disabled = true;
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/qingru@gmail.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            if (response.ok) {
+                successMessage.classList.add('show');
+                bookingForm.reset();
+                setTimeout(() => successMessage.classList.remove('show'), 6000);
+            } else {
+                alert('There was an error submitting your form. Please try again.');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('There was an error submitting your form. Please try again.');
+        } finally {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+</script>
 </body>
 </html>
