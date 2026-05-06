@@ -177,14 +177,15 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background-image: url('https://images.unsplash.com/photo-1522748906645-95d8adfd52c7?w=1600&h=1000&fit=crop');
+            background-image: url('assets/images/hero-bg.jpg');
             background-size: cover;
             background-position: center;
-            transform: scale(1.04);
-            animation: heroZoom 14s ease-out forwards;
+            transform: scale(1.06);
+            animation: heroZoom 20s ease-out forwards;
+            will-change: transform;
         }
         @keyframes heroZoom {
-            from { transform: scale(1.04); }
+            from { transform: scale(1.06); }
             to   { transform: scale(1); }
         }
 
@@ -286,6 +287,14 @@
             transform: translateY(14px);
             animation: fadeUp 1s 1s ease-out forwards;
         }
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 1s 1.3s ease-out forwards;
+        }
         .hero-cta {
             display: inline-block;
             text-decoration: none;
@@ -297,22 +306,23 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             transition: all 0.4s;
-            opacity: 0;
-            animation: fadeUp 1s 1.3s ease-out forwards;
             position: relative;
             overflow: hidden;
-        }
-        .hero-cta::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0);
-            transition: background 0.4s;
         }
         .hero-cta:hover {
             border-color: var(--gold-light);
             color: var(--sumi);
             background: var(--gold-light);
+        }
+        .hero-cta.secondary {
+            border-color: rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.08);
+        }
+        .hero-cta.secondary:hover {
+            border-color: rgba(255,255,255,0.6);
+            color: white;
+            background: rgba(255,255,255,0.15);
         }
 
         .scroll-indicator {
@@ -936,8 +946,11 @@
     <div class="hero-content">
         <p class="hero-sub-ja">美しい瞬間を永遠に</p>
         <h1 class="hero-title">Your Love Story,<br><em>Forever in Bloom</em></h1>
-        <p class="hero-desc">Japanese bridal photography — refined, timeless, unforgettable</p>
-        <a href="#booking" class="hero-cta">Schedule Your Session</a>
+        <p class="hero-desc">Award-winning Japanese bridal photography — refined, timeless, deeply personal</p>
+        <div class="hero-ctas">
+            <a href="#booking" class="hero-cta">Schedule Your Session</a>
+            <a href="#gallery" class="hero-cta secondary">Explore Gallery</a>
+        </div>
     </div>
     <div class="scroll-indicator">
         <span>Scroll</span>
@@ -958,7 +971,7 @@
         </div>
         <div class="about-grid">
             <div class="about-img-wrap reveal">
-                <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=600&h=780&fit=crop" alt="Cherry blossom bridal portrait">
+                <img src="assets/images/about-portrait.jpg" alt="Cherry blossom bridal portrait">
                 <div class="about-img-accent"></div>
                 <div class="about-img-label">花の美</div>
             </div>
@@ -1061,27 +1074,27 @@
         </div>
         <div class="gallery-grid">
             <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1522748906645-95d8adfd52c7?w=500&h=650&fit=crop" alt="Cherry blossom path">
+                <img src="assets/images/gallery-1.jpg" alt="Cherry blossom path">
                 <div class="gallery-overlay"><span>桜の道</span></div>
             </div>
             <div class="gallery-item reveal reveal-delay-1">
-                <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=500&h=400&fit=crop" alt="Japan scenery">
+                <img src="assets/images/gallery-2.jpg" alt="Japan scenery">
                 <div class="gallery-overlay"><span>日本の風景</span></div>
             </div>
             <div class="gallery-item reveal reveal-delay-2">
-                <img src="https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=500&h=600&fit=crop" alt="Mount Fuji">
+                <img src="assets/images/gallery-3.jpg" alt="Mount Fuji">
                 <div class="gallery-overlay"><span>富士山</span></div>
             </div>
             <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=500&h=380&fit=crop" alt="Japanese temple">
+                <img src="assets/images/gallery-4.jpg" alt="Japanese temple">
                 <div class="gallery-overlay"><span>神社</span></div>
             </div>
             <div class="gallery-item reveal reveal-delay-1">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&h=600&fit=crop" alt="Bridal portrait">
+                <img src="assets/images/gallery-5.jpg" alt="Bridal portrait">
                 <div class="gallery-overlay"><span>花嫁</span></div>
             </div>
             <div class="gallery-item reveal reveal-delay-2">
-                <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=500&h=420&fit=crop" alt="Tokyo lights">
+                <img src="assets/images/gallery-6.jpg" alt="Tokyo lights">
                 <div class="gallery-overlay"><span>東京の夜</span></div>
             </div>
         </div>
